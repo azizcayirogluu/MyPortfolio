@@ -1,0 +1,46 @@
+@model About
+@{
+  ViewData["Title"] = "Hakkımda Düzenle";
+  Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-warning py-3">
+            <h5 class="card-title mb-0 text-dark">Hakkımda Bilgisi Düzenle</h5>
+          </div>
+          <form method="post" asp-antiforgery="true">
+            <input type="hidden" asp-for="AboutId" />
+            <div class="card-body">
+              <div class="alert alert-info py-2 small">
+                <i class="la la-info-circle"></i> Düzenlemeler kaydedildiği an sitede yayına alınacaktır.
+              </div>
+              <div class="form-group">
+                <label class="font-weight-bold">Başlık</label>
+                <input asp-for="Title" class="form-control border-warning" required />
+                <span asp-validation-for="Title" class="text-danger small"></span>
+              </div>
+              <div class="form-group mt-3">
+                <label class="font-weight-bold">Alt Açıklama</label>
+                <textarea asp-for="SubDescription" class="form-control" rows="2"></textarea>
+              </div>
+              <div class="form-group mt-3">
+                <label class="font-weight-bold">Detaylı İçerik</label>
+                <textarea asp-for="Details" class="form-control" rows="6"></textarea>
+              </div>
+            </div>
+            <div class="card-footer bg-light d-flex justify-content-between">
+              <a href="/About/Index" class="btn btn-secondary btn-outline">İptal</a>
+              <button type="submit" class="btn btn-warning px-5 shadow-sm">
+                <i class="la la-refresh"></i> Güncelle
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

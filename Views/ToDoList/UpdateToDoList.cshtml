@@ -1,0 +1,52 @@
+﻿@model ToDoList
+@{
+    ViewData["Title"] = "Yapılacak Güncelle";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-success text-white py-3">
+                        <h5 class="card-title mb-0">Görevi Düzenle</h5>
+                    </div>
+                    <form method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="ToDoListId" />
+                        <div class="card-body p-4 text-dark">
+                            <div class="form-group mb-3">
+                                <label class="font-weight-bold">Görev Tanımı</label>
+                                <input type="text" asp-for="Title" class="form-control border-success" required />
+                                <span asp-validation-for="Title" class="text-danger small"></span>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 form-group mb-3">
+                                    <label class="font-weight-bold">Planlanan Tarih</label>
+                                    <input type="date" asp-for="Date" class="form-control border-success" required />
+                                    <span asp-validation-for="Date" class="text-danger small"></span>
+                                </div>
+                                <div class="col-md-6 form-group mb-3 text-dark">
+                                    <label class="font-weight-bold text-dark">İkon/Görsel</label>
+                                    <input type="text" asp-for="ImageUrl" class="form-control border-success" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-light d-flex justify-content-between py-3">
+                            <a href="/ToDoList/Index" class="btn btn-secondary">İptal</a>
+                            <button type="submit"
+                                class="btn btn-success px-5 shadow-sm font-weight-bold text-white">Değişiklikleri
+                                Güncelle</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,52 @@
+@model Message
+@{
+  ViewData["Title"] = "Yeni Mesaj";
+  Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card border-0 shadow">
+          <div class="card-header bg-dark text-white">
+            <h5 class="card-title mb-0">Yeni Mesaj Oluştur</h5>
+          </div>
+          <form method="post">
+            @Html.AntiForgeryToken()
+            <div class="card-body p-4">
+              <div class="row">
+                <div class="col-md-6 form-group mb-3">
+                  <label class="font-weight-bold">Alıcı Ad Soyad</label>
+                  <input type="text" asp-for="NameSurname" class="form-control shadow-none" placeholder="Ad Soyad"
+                    required>
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                  <label class="font-weight-bold">Alıcı E-Posta</label>
+                  <input type="email" asp-for="Email" class="form-control shadow-none" placeholder="ornek@mail.com"
+                    required>
+                </div>
+                <div class="col-md-12 form-group mb-3">
+                  <label class="font-weight-bold">Konu / Başlık</label>
+                  <input type="text" asp-for="Subject" class="form-control shadow-none"
+                    placeholder="Mesajın konusu nedir?" required>
+                </div>
+                <div class="col-md-12 form-group mb-0">
+                  <label class="font-weight-bold">Mesaj Detayı</label>
+                  <textarea asp-for="MessageDetail" class="form-control shadow-none" rows="6"
+                    placeholder="Mesajınızı buraya yazın..." required></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer bg-light d-flex justify-content-between">
+              <a href="/Message/Inbox" class="btn btn-link text-muted">İptal</a>
+              <button type="submit" class="btn btn-dark px-5">
+                <i class="la la-paper-plane"></i> Mesajı Gönder
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

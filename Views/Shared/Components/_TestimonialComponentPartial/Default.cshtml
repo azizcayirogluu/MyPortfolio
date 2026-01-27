@@ -1,0 +1,80 @@
+﻿@using MyPortolioUdemy.DAL.Entities
+@model List<Testimonial>
+
+<div class="s-testimonials" id="testimonials" style="background-color: #111; position: relative;">
+    <div class="overlay"></div>
+
+    <div class="row testimonials-header">
+        <div class="col-full text-center">
+            <h3 class="subhead" style="color: #862121; text-transform: uppercase;">Referanslar</h3>
+            <h1 class="display-2 font-weight-bold" style="color: white;">Referanslarım & Benim Hakkımdaki Yorumları</h1>
+        </div>
+    </div>
+
+    <div class="row testimonials">
+        <div class="col-full testimonials__slider">
+
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var item in Model)
+                {
+                    <div class="testimonials__slide">
+                        @* Resim hatasına karşı varsayılan resim desteği *@
+                        <img src="@item.ImageUrl" alt="@item.NameSurname" class="testimonials__avatar shadow"
+                            onerror="this.src='/assets/img/no-user.jpg';">
+
+                        <div class="testimonials__content">
+                            <p style="font-size: 1.8rem; line-height: 1.6; font-style: italic; color: #abb1b8;">
+                                <span style="font-size: 3rem; color: #862121; line-height: 0;">&ldquo;</span>
+                                @item.Description
+                                <span style="font-size: 3rem; color: #862121; line-height: 0;">&rdquo;</span>
+                            </p>
+                        </div>
+
+                        <div class="testimonials__author">
+                            <span class="testimonials__name"
+                                style="color: white; font-weight: bold; display: block;">@item.NameSurname</span>
+                            <span class="testimonials__position"
+                                style="color: #862121; font-size: 1.3rem; text-transform: uppercase;">@item.Title</span>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <p class="text-muted">Henüz bir referans kaydı bulunmuyor.</p>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Slider içindeki geçişleri ve metinleri optimize edelim */
+    .testimonials__slide {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .testimonials__avatar {
+        width: 90px !important;
+        height: 90px !important;
+        border: 3px solid #862121;
+        padding: 5px;
+        background: transparent;
+        margin-bottom: 2rem !important;
+    }
+
+    .testimonials__author {
+        margin-top: 2rem;
+    }
+
+    /* Tırnak işaretleri ve vurgu için */
+    .testimonials__content p {
+        position: relative;
+        padding: 0 20px;
+    }
+</style>

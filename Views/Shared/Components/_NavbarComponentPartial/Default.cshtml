@@ -1,0 +1,85 @@
+﻿<header class="s-header">
+
+    <div class="header-logo">
+        <a class="site-logo" href="/">
+            @* Logo resmin yoksa buraya text olarak ismini de yazabilirsin *@
+            <img src="~/hola-master/images/logo.png" alt="Aziz Çayıroğlu Portfolyo">
+        </a>
+    </div>
+
+    <nav class="header-nav-wrap">
+        <ul class="header-nav">
+            <li class="current">
+                <a class="smoothscroll" href="#home" title="home">
+                    <i class="la la-home d-lg-none"></i> Ana Sayfa
+                </a>
+            </li>
+            <li>
+                <a class="smoothscroll" href="#about" title="about">
+                    <i class="la la-user d-lg-none"></i> Hakkımda
+                </a>
+            </li>
+            <li>
+                <a class="smoothscroll" href="#works" title="works">
+                    <i class="la la-briefcase d-lg-none"></i> Projelerim
+                </a>
+            </li>
+            <li>
+                <a class="smoothscroll" href="#testimonials" title="testimonials">
+                    <i class="la la-comments d-lg-none"></i> Referanslarım
+                </a>
+            </li>
+            <li>
+                <a class="smoothscroll" href="#contact" title="contact">
+                    <i class="la la-envelope d-lg-none"></i> İletişim
+                </a>
+            </li>
+            @* Eğer Admin girişi için hızlı bir link istersen buraya ekleyebilirsin *@
+            <li class="admin-link">
+                <a href="/Statistic/Index" target="_blank" style="color: #862121 !important; font-weight: bold;">
+                    <i class="la la-lock"></i> Panel
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <a class="header-menu-toggle" href="#0"><span>Menu</span></a>
+
+</header>
+
+<style>
+    /* Header için modern dokunuşlar */
+    .s-header {
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Menü linklerine hover efekti */
+    .header-nav li a {
+        position: relative;
+        transition: color 0.3s;
+    }
+
+    .header-nav li a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        display: block;
+        margin-top: 5px;
+        right: 0;
+        background: #862121;
+        transition: width 0.3s ease;
+        -webkit-transition: width 0.3s ease;
+    }
+
+    .header-nav li a:hover::after {
+        width: 100%;
+        left: 0;
+        background: #862121;
+    }
+
+    /* Mobil için ikon desteği (Desktop'ta gizli) */
+    .d-lg-none {
+        display: none;
+    }
+</style>

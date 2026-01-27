@@ -1,0 +1,52 @@
+@{
+  dynamic message = ViewBag.Message;
+  ViewData["Title"] = "Mesaja Yanıt Ver";
+  Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="card border-0 shadow-sm mb-4" style="border-left: 5px solid #007bff !important;">
+          <div class="card-body bg-light py-3">
+            <small class="text-uppercase text-primary font-weight-bold d-block mb-2">Yanıtlanan Mesaj</small>
+            <p class="mb-1"><strong>Kimden:</strong> @message.NameSurname <span
+                class="text-muted">(@message.Email)</span></p>
+            <p class="mb-2"><strong>Konu:</strong> @message.Subject</p>
+            <div class="small italic text-muted border-top pt-2">
+              "@message.MessageDetail"
+            </div>
+          </div>
+        </div>
+
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-white border-bottom">
+            <h5 class="card-title mb-0 text-success"><i class="la la-paper-plane"></i> Yanıtınızı Hazırlayın</h5>
+          </div>
+          <form method="post">
+            <input type="hidden" name="messageId" value="@message.MessageId" />
+            @Html.AntiForgeryToken()
+            <div class="card-body">
+              <div class="form-group p-0">
+                <label class="font-weight-bold">E-posta İçeriği</label>
+                <textarea name="replyText" class="form-control border-success" rows="10"
+                  placeholder="Sayın @message.NameSurname, ..." required></textarea>
+                <div class="mt-2 p-2 bg-light rounded d-inline-block">
+                  <small class="text-muted"><i class="la la-info-circle"></i> Alıcı:
+                    <strong>@message.Email</strong></small>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer bg-white d-flex justify-content-end border-top py-3">
+              <a href="/Message/Inbox" class="btn btn-link text-muted mr-3">Vazgeç</a>
+              <button type="submit" class="btn btn-success btn-lg px-5 shadow-sm">
+                Gönder <i class="la la-send ml-1"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+﻿@model Message
+@{
+    ViewData["Title"] = "Mesaj Detayı";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-9">
+                <div class="card shadow-sm border-0">
+                    <div
+                        class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0"><i class="la la-envelope-open text-primary"></i> Mesaj İçeriği</h5>
+                        <span class="badge @(Model.IsRead ? "badge-light" : "badge-warning") p-2 px-3">
+                            @(Model.IsRead ? "Okundu" : "Yeni Mesaj")
+                        </span>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between mb-4 border-bottom pb-3">
+                            <div>
+                                <h6 class="font-weight-bold mb-0">@Model.NameSurname</h6>
+                                <a href="mailto:@Model.Email" class="text-primary small">@Model.Email</a>
+                            </div>
+                            <div class="text-right">
+                                <small class="text-muted d-block">Gönderim Tarihi</small>
+                                <span class="small font-weight-bold">@Model.SendDate.ToString("dd MMMM yyyy                            HH:mm")</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5 class="font-weight-bold text-dark mb-3">Konu: @Model.Subject</h5>
+                            <div class="bg-light p-4 rounded text-dark shadow-inner"
+                                style="min-height: 200px; line-height: 1.6; white-space: pre-line;">
+                                @Model.MessageDetail
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light d-flex justify-content-between border-top">
+                        <a href="/Message/Inbox" class="btn btn-secondary btn-outline">
+                            <i class="la la-arrow-left"></i> Listeye Dön
+                        </a>
+                        <div>
+                            <a href="/Message/DeleteMessage/@Model.MessageId"
+                                onclick="return confirm('Silmek istediğinize emin misiniz?')"
+                                class="btn btn-danger mr-2">
+                                <i class="la la-trash"></i> Sil
+                            </a>
+                            <a href="/Message/Reply/@Model.MessageId" class="btn btn-primary px-4">
+                                <i class="la la-reply"></i> Yanıtla
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

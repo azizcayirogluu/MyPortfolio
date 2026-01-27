@@ -1,0 +1,61 @@
+﻿@model Experience
+@{
+    ViewData["Title"] = "Deneyim Güncelle";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm border-0">
+                    <div
+                        class="card-header bg-warning py-3 d-flex justify-content-between align-items-center text-dark">
+                        <h5 class="card-title mb-0">Deneyimi Düzenle</h5>
+                        <small class="font-weight-bold">ID: #@Model.ExperienceId</small>
+                    </div>
+                    <div class="card-body p-4 text-dark">
+                        <form method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" asp-for="ExperienceId" />
+
+                            <div class="form-group mb-3 text-dark">
+                                <label class="font-weight-bold">Firma Bilgisi</label>
+                                <input type="text" asp-for="Head" class="form-control border-warning" />
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 form-group mb-3">
+                                    <label class="font-weight-bold">Çalışılan Pozisyon</label>
+                                    <input type="text" asp-for="Title" class="form-control" />
+                                </div>
+                                <div class="col-md-6 form-group mb-3">
+                                    <label class="font-weight-bold">Tarih Aralığı</label>
+                                    <input type="text" asp-for="Date" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="font-weight-bold">İş Açıklaması</label>
+                                <textarea rows="5" class="form-control" asp-for="Description"></textarea>
+                            </div>
+
+                            <div
+                                class="card-footer bg-transparent px-0 d-flex justify-content-between align-items-center">
+                                <a href="/Experience/ExperienceList" class="btn btn-link text-muted"><i
+                                        class="la la-arrow-left"></i> Listeye Dön</a>
+                                <button type="submit"
+                                    class="btn btn-warning px-5 shadow-sm font-weight-bold">Değişiklikleri
+                                    Uygula</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

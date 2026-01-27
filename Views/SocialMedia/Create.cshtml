@@ -1,0 +1,50 @@
+@model SocialMedia
+@{
+  ViewData["Title"] = "Sosyal Medya Ekle";
+  Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-primary py-3">
+            <h5 class="card-title mb-0 text-white">Yeni Sosyal Medya Ekle</h5>
+          </div>
+          <form method="post" asp-antiforgery="true">
+            <div class="card-body p-4">
+              <div class="form-group mb-3">
+                <label class="font-weight-bold">Platform Adı</label>
+                <input asp-for="Title" class="form-control" placeholder="Örn: Instagram, LinkedIn" required />
+                <span asp-validation-for="Title" class="text-danger small"></span>
+              </div>
+
+              <div class="form-group mb-3">
+                <label class="font-weight-bold">Profil Linki (URL)</label>
+                <input asp-for="Url" type="url" class="form-control" placeholder="https://..." required />
+                <span asp-validation-for="Url" class="text-danger small"></span>
+              </div>
+
+              <div class="form-group mb-3">
+                <label class="font-weight-bold">İkon Kodu</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="la la-font-awesome"></i></span>
+                  </div>
+                  <input asp-for="Icon" class="form-control" placeholder="Örn: fab fa-instagram" />
+                </div>
+                <small class="text-muted mt-1 d-block">Font Awesome veya Line Awesome sınıflarını
+                  kullanabilirsiniz.</small>
+              </div>
+            </div>
+            <div class="card-footer bg-light d-flex justify-content-between">
+              <a href="/SocialMedia/Index" class="btn btn-link text-muted">Vazgeç</a>
+              <button type="submit" class="btn btn-primary px-5 shadow">Bağlantıyı Kaydet</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+﻿@model Experience
+@{
+    ViewData["Title"] = "Deneyim Ekle";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-primary text-white py-3">
+                        <h5 class="card-title mb-0">Yeni Deneyim Ekleme</h5>
+                    </div>
+                    <div class="card-body p-4">
+                        @if (!ViewData.ModelState.IsValid)
+                        {
+                            <div class="alert alert-danger border-0 mb-4">
+                                <ul class="mb-0">
+                                    @foreach (var modelState in ViewData.ModelState.Values)
+                                        foreach (var error in modelState.Errors)
+                                        {
+                                            <li>@error.ErrorMessage</li>
+                                        }
+                                </ul>
+                            </div>
+                        }
+
+                        <form method="post">
+                            @Html.AntiForgeryToken()
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">Firma Adı</label>
+                                    <input type="text" asp-for="Head" class="form-control" placeholder="Örn: Google" />
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">Pozisyon</label>
+                                    <input type="text" asp-for="Title" class="form-control"
+                                        placeholder="Örn: Full Stack Developer" />
+                                </div>
+                                <div class="col-md-12 form-group mt-2">
+                                    <label class="font-weight-bold">Çalışma Tarihleri</label>
+                                    <input type="text" asp-for="Date" class="form-control"
+                                        placeholder="Örn: Haziran 2021 - Günümüz" />
+                                </div>
+                                <div class="col-md-12 form-group mt-2">
+                                    <label class="font-weight-bold">Görev Tanımı / Açıklama</label>
+                                    <textarea rows="5" class="form-control" asp-for="Description"
+                                        placeholder="Neler yaptınız? Başarılarınız neler?"></textarea>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent px-0 pb-0 mt-3 d-flex justify-content-between">
+                                <a href="/Experience/ExperienceList" class="btn btn-outline-secondary">Vazgeç</a>
+                                <button type="submit" class="btn btn-primary px-5 shadow">Kaydet ve Yayınla</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

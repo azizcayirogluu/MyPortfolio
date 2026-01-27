@@ -1,0 +1,151 @@
+﻿@model List<ToDoList>
+
+<div class="main-header">
+	<div class="logo-header">
+		<a href="/Statistic/Index" class="logo" style="color: #862121; font-weight: 800; letter-spacing: 1px;">
+			<i class="la la-code"></i> ADMİN PANEL
+		</a>
+		<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse"
+			aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<button class="topbar-toggler more"><i class="la la-ellipsis-v"></i></button>
+	</div>
+
+	<nav class="navbar navbar-header navbar-expand-lg">
+		<div class="container-fluid">
+
+			<form class="navbar-left navbar-form nav-search mr-md-3 d-none d-sm-block">
+				<div class="input-group shadow-sm">
+					<input type="text" placeholder="Hızlı ara..." class="form-control">
+					<div class="input-group-append">
+						<span class="input-group-text bg-white border-left-0">
+							<i class="la la-search search-icon" style="color: #862121;"></i>
+						</span>
+					</div>
+				</div>
+			</form>
+
+			<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+				<li class="nav-item dropdown hidden-caret">
+					<a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">
+						<i class="la la-envelope"></i>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right shadow border-0 animated fadeIn"
+						aria-labelledby="messageDropdown">
+						<div class="dropdown-header text-center text-white p-2" style="background: #862121;">Mesaj Merkezi</div>
+						<a class="dropdown-item" href="/Message/Inbox"><i class="la la-inbox"></i> Gelen Kutusu</a>
+						<a class="dropdown-item" href="/Message/Create"><i class="la la-pencil"></i> Yeni Mesaj</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item text-center small" href="/Contact/Index">İletişim Paneli</a>
+					</div>
+				</li>
+
+				<li class="nav-item dropdown hidden-caret">
+					<a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">
+						<i class="la la-bell"></i>
+						@if (ViewBag.toDoListCount > 0)
+						{
+							<span class="notification pulse" style="background: #862121;">@ViewBag.toDoListCount</span>
+						}
+					</a>
+					<ul class="dropdown-menu notif-box animated fadeIn shadow border-0" aria-labelledby="notifDropdown">
+						<li>
+							<div class="dropdown-title">@ViewBag.toDoListCount Bekleyen Göreviniz Var</div>
+						</li>
+						<li>
+							<div class="notif-center overflow-auto" style="max-height: 300px;">
+								@if (Model != null && Model.Any())
+								{
+									@foreach (var item in Model.Where(x => x.Status == false).Take(5))
+									{
+										<a href="/ToDoList/Index">
+											<div class="notif-icon" style="background: rgba(134, 33, 33, 0.1); color: #862121;">
+												<i class="@(string.IsNullOrEmpty(item.ImageUrl) ? "la la-sticky-note" : item.ImageUrl)"></i>
+											</div>
+											<div class="notif-content">
+												<span class="block">@item.Title</span>
+												<span class="time font-italic small text-muted">@item.Date.ToShortDateString()</span>
+											</div>
+										</a>
+									}
+								}
+								else
+								{
+									<div class="p-3 text-center small text-muted font-italic">Yeni bildirim yok.</div>
+								}
+							</div>
+						</li>
+						<li>
+							<a class="see-all font-weight-bold border-top" href="/ToDoList/Index">Tümünü Gör <i
+									class="la la-angle-right"></i></a>
+						</li>
+					</ul>
+				</li>
+
+				<li class="nav-item dropdown">
+					<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
+						<img src="~/Ready-Bootstrap-Dashboard-master/assets/img/profile.jpg" alt="user-img" width="36"
+							class="img-circle border">
+						<span class="ml-2 font-weight-bold d-none d-md-inline">Aziz Ç.</span>
+					</a>
+					<ul class="dropdown-menu dropdown-user animated fadeIn shadow border-0">
+						<li>
+							<div class="user-box p-3 border-bottom">
+								<div class="u-img"><img src="~/Ready-Bootstrap-Dashboard-master/assets/img/profile.jpg" alt="user"
+										class="rounded"></div>
+								<div class="u-text">
+									<h4 class="mb-0">Aziz Çayıroğlu</h4>
+									<p class="text-muted small">aziz@cayiroglu.com</p>
+									<a href="/" target="_blank" class="btn btn-rounded btn-sm px-3 text-white"
+										style="background: #862121;">Sitemize Git</a>
+								</div>
+							</div>
+						</li>
+						<a class="dropdown-item mt-2" href="#"><i class="la la-user"></i> Profilim</a>
+						<a class="dropdown-item" href="/Message/Inbox"><i class="la la-envelope"></i> Mesajlar</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#"><i class="la la-cog"></i> Ayarlar</a>
+						@* Çıkış yap linki dropdown-item olarak düzeltildi *@
+						<a class="dropdown-item text-danger font-weight-bold" href="/Login/Logout/">
+							<i class="la la-power-off"></i> Güvenli Çıkış
+						</a>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
+<style>
+	/* Bildirim balonuna nabız (pulse) efekti */
+	.pulse {
+		animation: pulse-red 2s infinite;
+		border-radius: 50%;
+	}
+
+	@@keyframes pulse-red {
+		0% {
+			transform: scale(0.95);
+			box-shadow: 0 0 0 0 rgba(134, 33, 33, 0.7);
+		}
+
+		70% {
+			transform: scale(1);
+			box-shadow: 0 0 0 10px rgba(134, 33, 33, 0);
+		}
+
+		100% {
+			transform: scale(0.95);
+			box-shadow: 0 0 0 0 rgba(134, 33, 33, 0);
+		}
+	}
+
+	/* Hover efektlerini bordo tona çekelim */
+	.dropdown-item:hover {
+		background-color: rgba(134, 33, 33, 0.05) !important;
+		color: #862121 !important;
+	}
+</style>

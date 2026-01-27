@@ -1,0 +1,54 @@
+@model SocialMedia
+@{
+  ViewData["Title"] = "Sosyal Medya Düzenle";
+  Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-warning py-3">
+            <h5 class="card-title mb-0 font-weight-bold">Bağlantıyı Güncelle</h5>
+          </div>
+          <form method="post" asp-antiforgery="true">
+            <input type="hidden" asp-for="SocialMediaId" />
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center mb-4 p-3 bg-light rounded shadow-inner">
+                <div class="avatar avatar-lg mr-3">
+                  <span class="avatar-title rounded-circle bg-warning text-dark border border-white">
+                    <i class="@Model.Icon" style="font-size: 2rem;"></i>
+                  </span>
+                </div>
+                <div>
+                  <h6 class="mb-0 font-weight-bold text-dark">Mevcut İkon</h6>
+                  <p class="small text-muted mb-0">Platform: @Model.Title</p>
+                </div>
+              </div>
+
+              <div class="form-group mb-3 text-dark">
+                <label class="font-weight-bold">Platform</label>
+                <input asp-for="Title" class="form-control border-warning" required />
+              </div>
+
+              <div class="form-group mb-3">
+                <label class="font-weight-bold">URL</label>
+                <input asp-for="Url" type="url" class="form-control border-warning" required />
+              </div>
+
+              <div class="form-group mb-0">
+                <label class="font-weight-bold">İkon Sınıfı</label>
+                <input asp-for="Icon" class="form-control border-warning" />
+              </div>
+            </div>
+            <div class="card-footer bg-light d-flex justify-content-between">
+              <a href="/SocialMedia/Index" class="btn btn-secondary">Geri Dön</a>
+              <button type="submit" class="btn btn-warning px-5 font-weight-bold shadow-sm">Güncelle</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

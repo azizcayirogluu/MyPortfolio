@@ -1,0 +1,71 @@
+﻿@model List<MyPortolioUdemy.DAL.Entities.Experience>
+
+<div class="row about-content about-content--timeline">
+
+    <div class="col-full text-center" style="margin-bottom: 5rem;">
+        <h3 class="subhead" style="color: #862121;">Kariyer Yolculuğum</h3>
+        <h2 class="display-1" style="color: #313131;">İş ve Proje Deneyimlerim</h2>
+    </div>
+
+    <div class="timeline-container d-flex flex-wrap">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <div class="col-six tab-full timeline-wrapper">
+                    <div class="timeline">
+                        <div class="timeline__block transition-hover">
+                            <div class="timeline__bullet"></div>
+                            <div class="timeline__header">
+                                <p class="timeline__timeframe" style="font-weight: bold; color: #862121;">
+                                    <i class="la la-calendar"></i> @item.Date
+                                </p>
+                                <h3 style="margin-top: 0.5rem;">@item.Head</h3>
+                                <h5 class="text-muted"
+                                    style="text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">
+                                    @item.Title
+                                </h5>
+                            </div>
+                            <div class="timeline__desc" style="margin-top: 1.5rem;">
+                                <p style="text-align: justify; color: #555;">
+                                    @Html.Raw(item.Description?.Replace("\n", "<br/>"))
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-full text-center">
+                <p class="text-muted font-italic">Henüz deneyim bilgisi eklenmemiş.</p>
+            </div>
+        }
+    </div>
+
+</div>
+
+<style>
+    /* Deneyim bloklarına hafif bir derinlik ve etkileşim katalım */
+    .timeline__block {
+        background: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        transition: all 0.3s ease;
+        border: 1px solid transparent;
+    }
+
+    .timeline__block:hover {
+        transform: translateX(10px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        border-color: #86212133;
+    }
+
+    .timeline__bullet {
+        background-color: #862121 !important;
+        border: 4px solid #fff;
+        box-shadow: 0 0 0 2px #862121;
+    }
+</style>

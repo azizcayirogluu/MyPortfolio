@@ -1,0 +1,46 @@
+@model Testimonial
+@{
+  ViewData["Title"] = "Referans Ekle";
+  Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-primary py-3">
+            <h5 class="card-title mb-0 text-white">Yeni Referans Bilgisi</h5>
+          </div>
+          <form method="post" asp-antiforgery="true">
+            <div class="card-body p-4 text-dark">
+              <div class="row">
+                <div class="col-md-6 form-group mb-3">
+                  <label class="font-weight-bold">Ad Soyad</label>
+                  <input asp-for="NameSurname" class="form-control" placeholder="Müşterinin adı..." required />
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                  <label class="font-weight-bold">Ünvan / Şirket</label>
+                  <input asp-for="Title" class="form-control" placeholder="Örn: CEO, ABC Yazılım" />
+                </div>
+                <div class="col-md-12 form-group mb-3">
+                  <label class="font-weight-bold">Profil Fotoğrafı (URL)</label>
+                  <input asp-for="ImageUrl" class="form-control border-primary" placeholder="Görsel bağlantısı..." />
+                </div>
+                <div class="col-md-12 form-group mb-0">
+                  <label class="font-weight-bold">Kişinin Yorumu</label>
+                  <textarea asp-for="Description" class="form-control" rows="5"
+                    placeholder="Hakkınızdaki görüşleri buraya yazın..."></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer bg-light d-flex justify-content-between py-3">
+              <a href="/Testimonial/Index" class="btn btn-link text-muted">Vazgeç</a>
+              <button type="submit" class="btn btn-primary px-5 shadow">Kaydet</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+﻿<section id="works" class="s-works target-section">
+
+    <div class="row narrow section-intro has-bottom-sep">
+        <div class="col-full text-center">
+            <h3 class="subhead" style="color: #862121; text-transform: uppercase;">Portfolyo</h3>
+            <h1 class="display-2 font-weight-bold">Projelerim</h1>
+            <p class="lead">Geliştirdiğim projeleri görmek için üzerlerine tıklayabilirsiniz.</p>
+        </div>
+    </div>
+
+    <div class="row masonry-wrap">
+        <div class="masonry">
+            @{
+                var portfolios = Model as List<MyPortolioUdemy.DAL.Entities.Portfolio>;
+
+                if (portfolios == null || !portfolios.Any())
+                {
+                    <div class="col-full">
+                        <p class="text-center text-muted py-5 border rounded" style="background: #1e1e1e; border-color:#333;">
+                            <i class="la la-info-circle"></i> Henüz sergilenecek bir proje eklenmemiş.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    foreach (var portfolio in portfolios)
+                    {
+                        <div class="masonry__brick">
+                            <div class="item-folio transition-hover">
+
+                                @* thumb-link class'ı ve data-size PhotoSwipe için kritiktir *@
+                                <div class="item-folio__thumb">
+                                    <a href="@portfolio.ImageUrl" class="thumb-link" title="@portfolio.Title" data-size="1050x700">
+                                        <img src="@portfolio.ImageUrl" alt="@portfolio.Title">
+                                        <span class="shadow-overlay"></span>
+                                    </a>
+                                </div>
+
+                                <div class="item-folio__text">
+                                    <h3 class="item-folio__title">@portfolio.Title</h3>
+                                    <p class="item-folio__cat" style="color: #862121;">@portfolio.SubTitle</p>
+                                </div>
+
+                                @if (!string.IsNullOrEmpty(portfolio.Url))
+                                {
+                                    <a href="@portfolio.Url" class="item-folio__project-link" title="Proje Linki" target="_blank">
+                                        <i class="la la-external-link"></i>
+                                    </a>
+                                }
+
+                                @* Resim büyüdüğünde altında çıkacak açıklama burasıdır *@
+                                <div class="item-folio__caption">
+                                    <p>@portfolio.Description</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Bordo Temalı Portfolyo Düzeltmeleri */
+    .item-folio {
+        background: #1e1e1e;
+        /* Dark tema uyumu */
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .item-folio__title {
+        color: #fff !important;
+    }
+
+    .item-folio__project-link {
+        background-color: #862121 !important;
+    }
+
+    .item-folio__project-link:hover {
+        background-color: #611717 !important;
+    }
+
+    /* Resim büyütme efekti için imleç */
+    .thumb-link {
+        cursor: zoom-in;
+    }
+</style>

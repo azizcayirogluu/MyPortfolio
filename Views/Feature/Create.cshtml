@@ -1,0 +1,43 @@
+@model Feature
+@{
+  ViewData["Title"] = "Öne Çıkan Alan Ekle";
+  Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-primary py-3">
+            <h5 class="card-title mb-0 text-white font-weight-bold">Yeni Öne Çıkan Alan Ekle</h5>
+          </div>
+          <form method="post" asp-antiforgery="true">
+            <div class="card-body p-4">
+              <div class="form-group mb-4">
+                <label class="font-weight-bold text-dark">Alan Başlığı</label>
+                <input asp-for="Title" class="form-control form-control-lg border-primary"
+                  placeholder="Büyük puntolu başlık yazın..." required />
+                <span asp-validation-for="Title" class="text-danger small"></span>
+                <small class="form-text text-muted">Web sitesinin en üstünde görünecek ana slogan.</small>
+              </div>
+
+              <div class="form-group mb-2">
+                <label class="font-weight-bold text-dark">Açıklama Metni</label>
+                <textarea asp-for="Description" class="form-control" rows="5"
+                  placeholder="Başlığın hemen altındaki tanıtım yazısı..."></textarea>
+                <span asp-validation-for="Description" class="text-danger small"></span>
+              </div>
+            </div>
+            <div class="card-footer bg-light d-flex justify-content-between py-3">
+              <a href="/Feature/Index" class="btn btn-link text-muted"><i class="la la-arrow-left"></i> Vazgeç</a>
+              <button type="submit" class="btn btn-primary px-5 shadow">
+                <i class="la la-check"></i> Alanı Oluştur
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+@model Skill
+@{
+  ViewData["Title"] = "Yetenek Ekle";
+  Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-primary text-white py-3">
+            <h5 class="card-title mb-0">Yeni Yetenek Tanımla</h5>
+          </div>
+          <form method="post" asp-antiforgery="true">
+            <div class="card-body p-4">
+              <div class="form-group mb-4">
+                <label class="font-weight-bold">Yetenek Başlığı</label>
+                <input asp-for="Title" class="form-control" placeholder="Örn: C#, React, Project Management" required />
+                <span asp-validation-for="Title" class="text-danger small"></span>
+              </div>
+
+              <div class="form-group mb-2">
+                <label class="font-weight-bold">Bilgi Düzeyi (%)</label>
+                <div class="input-group">
+                  <input asp-for="Value" type="number" min="0" max="100" class="form-control"
+                    placeholder="0-100 arası bir değer" required />
+                  <div class="input-group-append">
+                    <span class="input-group-text bg-light text-primary font-weight-bold">%</span>
+                  </div>
+                </div>
+                <span asp-validation-for="Value" class="text-danger small"></span>
+              </div>
+            </div>
+            <div class="card-footer bg-light d-flex justify-content-between">
+              <a href="/Skill/Index" class="btn btn-outline-secondary">Vazgeç</a>
+              <button type="submit" class="btn btn-primary px-5 shadow">Kaydet</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

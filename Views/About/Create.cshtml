@@ -1,0 +1,44 @@
+@model About
+@{
+  ViewData["Title"] = "Yeni Hakkımda Ekle";
+  Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-white border-bottom py-3">
+            <h5 class="card-title mb-0 text-primary">Yeni Hakkımda Bilgisi Ekle</h5>
+          </div>
+          <form method="post" asp-antiforgery="true">
+            <div class="card-body">
+              <div class="form-group">
+                <label class="font-weight-bold">Başlık</label>
+                <input asp-for="Title" class="form-control" placeholder="Başlığı buraya yazın..." required />
+                <span asp-validation-for="Title" class="text-danger small"></span>
+              </div>
+              <div class="form-group mt-3">
+                <label class="font-weight-bold">Alt Açıklama</label>
+                <textarea asp-for="SubDescription" class="form-control" rows="2"
+                  placeholder="Kısa giriş cümlesi..."></textarea>
+              </div>
+              <div class="form-group mt-3">
+                <label class="font-weight-bold">Detaylı İçerik</label>
+                <textarea asp-for="Details" class="form-control" rows="6"
+                  placeholder="Tüm detayları buraya ekleyin..."></textarea>
+              </div>
+            </div>
+            <div class="card-footer bg-light d-flex justify-content-between">
+              <a href="/About/Index" class="btn btn-link text-muted">Geri Dön</a>
+              <button type="submit" class="btn btn-primary px-5 shadow-sm">
+                <i class="la la-save"></i> Kaydet
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

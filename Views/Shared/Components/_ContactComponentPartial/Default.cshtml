@@ -1,0 +1,128 @@
+﻿<section id="contact" class="s-contact target-section">
+
+    <div class="overlay"></div>
+
+    <div class="row narrow section-intro">
+        <div class="col-full">
+            <h3 class="subhead" style="color: #862121; text-transform: uppercase;">İletişim</h3>
+            <h1 class="display-2 font-weight-bold" style="color:white">Bana Ulaşın.</h1>
+            <p class="lead">Projeniz mi var ya da sadece merhaba mı demek istiyorsunuz? Aşağıdaki formdan ya da
+                bilgilerimden bana her zaman ulaşabilirsiniz.</p>
+        </div>
+    </div>
+
+    <div class="row contact__main">
+        <div class="col-eight tab-full contact__form shadow-lg p-5"
+            style="background: rgba(255,255,255,0.03); border-radius: 15px;">
+            <form name="contactForm" id="contactForm" method="post" action="/Message/Create">
+                @Html.AntiForgeryToken()
+                <fieldset>
+                    <div class="form-field">
+                        <input name="nameSurname" type="text" id="contactName" placeholder="Adınız ve Soyadınız"
+                            minlength="2" required class="full-width border-bottom-only">
+                    </div>
+                    <div class="form-field">
+                        <input name="email" type="email" id="contactEmail" placeholder="E-Posta Adresiniz" required
+                            class="full-width border-bottom-only">
+                    </div>
+                    <div class="form-field">
+                        <input name="subject" type="text" id="contactSubject" placeholder="Mesaj Konusu"
+                            class="full-width border-bottom-only">
+                    </div>
+                    <div class="form-field">
+                        <textarea name="messageDetail" id="contactMessage" placeholder="Size nasıl yardımcı olabilirim?"
+                            rows="8" required class="full-width"></textarea>
+                    </div>
+                    <div class="form-field">
+                        <button type="submit" class="full-width btn--primary shadow">
+                            <i class="la la-paper-plane"></i> Mesajı Gönder
+                        </button>
+
+                        <div class="submit-loader mt-3">
+                            <div class="text-loader">Gönderiliyor...</div>
+                            <div class="s-loader">
+                                <div class="bounce1"></div>
+                                <div class="bounce2"></div>
+                                <div class="bounce3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+
+            <div class="message-warning mt-3 border-0 bg-danger text-white p-3 rounded" style="display:none;">
+                <i class="la la-exclamation-circle"></i> Bir sorun oluştu. Lütfen tüm alanları kontrol edip tekrar
+                deneyin.
+            </div>
+
+            <div class="message-success mt-3 border-0 bg-success text-white p-3 rounded" style="display:none;">
+                <i class="la la-check-circle"></i> Mesajınız başarıyla gönderildi, en kısa sürede dönüş yapacağım!
+            </div>
+        </div>
+
+        <div class="col-four tab-full contact__infos">
+            @{
+                var contact = Model as MyPortolioUdemy.DAL.Entities.Contact ?? new MyPortolioUdemy.DAL.Entities.Contact();
+            }
+
+            <div class="contact-info-block mb-5">
+                <h4 class="h06 text-primary"><i class="la la-phone"></i> Telefon</h4>
+                <p>
+                    @if (!string.IsNullOrEmpty(contact.Phone1))
+                    {
+                        <a href="tel:@contact.Phone1" style="color: #abb1b8;">@contact.Phone1</a>
+
+                        <br>
+                    }
+                    @if (!string.IsNullOrEmpty(contact.Phone2))
+                    {
+                        <a href="tel:@contact.Phone2" style="color: #abb1b8;">@contact.Phone2</a>
+                    }
+                </p>
+            </div>
+
+            <div class="contact-info-block mb-5">
+                <h4 class="h06 text-primary"><i class="la la-envelope"></i> E-Posta</h4>
+                <p>
+                    @if (!string.IsNullOrEmpty(contact.Email1))
+                    {
+                        <a href="mailto:@contact.Email1" style="color: #abb1b8;">@contact.Email1</a>
+
+                        <br>
+                    }
+                    @if (!string.IsNullOrEmpty(contact.Email2))
+                    {
+                        <a href="mailto:@contact.Email2" style="color: #abb1b8;">@contact.Email2</a>
+                    }
+                </p>
+            </div>
+
+            <div class="contact-info-block mb-5">
+                <h4 class="h06 text-primary"><i class="la la-map-marker"></i> Adres</h4>
+                <p style="color: #abb1b8; line-height: 1.6;">
+                    @(string.IsNullOrEmpty(contact.Address) ? "Belirtilmedi" : contact.Address)
+                </p>
+            </div>
+
+            @* Sosyal Medya Bileşeni çağrısı hata vermemesi için buradan kaldırıldı *@
+        </div>
+    </div>
+</section>
+
+<style>
+    .border-bottom-only {
+        background: transparent !important;
+        border: none !important;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1) !important;
+        transition: border-color 0.3s ease;
+    }
+
+    .border-bottom-only:focus {
+        border-bottom: 2px solid #862121 !important;
+    }
+
+    .contact-info-block h4 {
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+</style>
