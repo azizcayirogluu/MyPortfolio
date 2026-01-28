@@ -1,49 +1,65 @@
 @model Portfolio
+
 @{
   ViewData["Title"] = "Yeni Proje";
   Layout = "~/Views/Layout/Index.cshtml";
 }
 
-<div class="content">
-  <div class="container-fluid">
-    <div class="row justify-content-center">
-      <div class="col-md-10">
-        <div class="card shadow-sm border-0">
-          <div class="card-header bg-primary py-3 text-white font-weight-bold">
-            <h5 class="card-title mb-0 text-white">Yeni Portfolyo Ekle</h5>
-          </div>
-          <form method="post" asp-antiforgery="true">
-            <div class="card-body p-4">
-              <div class="row">
-                <div class="col-md-6 form-group mb-3">
-                  <label class="font-weight-bold">Proje Adı</label>
-                  <input asp-for="Title" class="form-control" placeholder="Proje başlığı..." required />
-                </div>
-                <div class="col-md-6 form-group mb-3">
-                  <label class="font-weight-bold">Kategori / Alt Başlık</label>
-                  <input asp-for="SubTitle" class="form-control" placeholder="Örn: Web Geliştirme" />
-                </div>
-                <div class="col-md-12 form-group mb-3">
-                  <label class="font-weight-bold">Proje Açıklaması</label>
-                  <textarea asp-for="Description" class="form-control" rows="4"></textarea>
-                </div>
-                <div class="col-md-6 form-group mb-3 text-primary">
-                  <label class="font-weight-bold">Görsel URL</label>
-                  <input asp-for="ImageUrl" class="form-control border-primary" placeholder="Görsel bağlantısı..." />
-                </div>
-                <div class="col-md-6 form-group mb-3 text-info">
-                  <label class="font-weight-bold">Proje Linki (URL)</label>
-                  <input asp-for="Url" class="form-control border-info" placeholder="Site adresi..." />
-                </div>
-              </div>
-            </div>
-            <div class="card-footer bg-light d-flex justify-content-between">
-              <a href="/Portfolio/Index" class="btn btn-link text-muted">Vazgeç</a>
-              <button type="submit" class="btn btn-primary px-5 shadow-sm">Kaydet</button>
-            </div>
-          </form>
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0 text-center">Yeni Portfolyo Ekle</h5>
         </div>
+
+        <form method="post">
+          <div class="card-body">
+            <div class="row">
+
+              <div class="col-md-6 mb-3">
+                <label>Proje Adı</label>
+                <input asp-for="Title" class="form-control" />
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label>Alt Başlık</label>
+                <input asp-for="SubTitle" class="form-control" />
+              </div>
+
+              <div class="col-md-12 mb-3">
+                <label>Açıklama</label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label>Görsel URL</label>
+                <input asp-for="ImageUrl" class="form-control" />
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label>Proje Linki</label>
+                <input asp-for="Url" class="form-control" />
+              </div>
+
+            </div>
+          </div>
+
+          <div class="card-footer text-end">
+            <button type="submit" class="btn btn-primary">
+              Kaydet
+            </button>
+          </div>
+        </form>
+
       </div>
     </div>
   </div>
 </div>
+
+@section Scripts {
+  <script>
+    console.log("Create.cshtml scripts çalışıyor");
+  </script>
+}

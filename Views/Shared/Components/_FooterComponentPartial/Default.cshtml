@@ -1,17 +1,18 @@
 ﻿<footer>
     <div class="row">
         <div class="col-full">
-
             <div class="footer-logo">
                 <a class="footer-site-logo" href="#top">
-                    <h3 style="color:white; letter-spacing: 2px; font-weight: bold;">AZİZ ÇAYIROĞLU</h3>
+                    <h5 style="color:white; letter-spacing: 2px; font-weight: bold; text-transform: uppercase;">AZİZ
+                        ÇAYIROĞLU</h5>
                 </a>
             </div>
 
             <ul class="footer-social">
                 @{
-                    var socialMediaList = Model as List<MyPortolioUdemy.DAL.Entities.SocialMedia> ?? new
-                    List<MyPortolioUdemy.DAL.Entities.SocialMedia>();
+                    var socialMediaList = Model as List<MyPortolioUdemy.DAL.Entities.SocialMedia>
+                    ?? new List<MyPortolioUdemy.DAL.Entities.SocialMedia>();
+
                     foreach (var social in socialMediaList)
                     {
                         <li>
@@ -23,7 +24,6 @@
                     }
                 }
             </ul>
-
         </div>
     </div>
 
@@ -32,9 +32,7 @@
             <div class="copyright">
                 <span>© @DateTime.Now.Year Aziz Çayıroğlu</span>
                 <span>
-                    <span class="badge"
-                        style="background:#862121; padding: 2px 8px; border-radius: 4px; font-size: 10px; color: white;">PROJE</span>
-                    Bu portfolyo <strong>Asp.Net Core 6.0 MVC</strong> ile geliştirilmiştir.
+                    Bu portfolyo <strong style="color: #862121;">Asp.Net Core 8.0 MVC</strong> ile geliştirilmiştir.
                 </span>
             </div>
 

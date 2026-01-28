@@ -4,7 +4,7 @@
         <div class="col-full text-center">
             <h3 class="subhead" style="color: #862121; text-transform: uppercase;">Portfolyo</h3>
             <h1 class="display-2 font-weight-bold">Projelerim</h1>
-            <p class="lead">Geliştirdiğim projeleri görmek için üzerlerine tıklayabilirsiniz.</p>
+            <p class="lead">Geliştirdiğim projeleri keşfetmek için üzerlerine gelebilirsiniz.</p>
         </div>
     </div>
 
@@ -13,44 +13,32 @@
             @{
                 var portfolios = Model as List<MyPortolioUdemy.DAL.Entities.Portfolio>;
 
-                if (portfolios == null || !portfolios.Any())
-                {
-                    <div class="col-full">
-                        <p class="text-center text-muted py-5 border rounded" style="background: #1e1e1e; border-color:#333;">
-                            <i class="la la-info-circle"></i> Henüz sergilenecek bir proje eklenmemiş.
-                        </p>
-                    </div>
-                }
-                else
+                if (portfolios != null && portfolios.Any())
                 {
                     foreach (var portfolio in portfolios)
                     {
-                        <div class="masonry__brick">
-                            <div class="item-folio transition-hover">
+                        <div class="masonry__brick portfolio-box">
+                            <div class="item-folio">
 
-                                @* thumb-link class'ı ve data-size PhotoSwipe için kritiktir *@
+                                @* --- 1. AŞAMA: SADECE RESİM VE HOVER EFEKTİ --- *@
                                 <div class="item-folio__thumb">
-                                    <a href="@portfolio.ImageUrl" class="thumb-link" title="@portfolio.Title" data-size="1050x700">
+                                    @* Başlık çakışmasını önlemek için 'title' özniteliğini boş bıraktık *@
+                                    <a href="@portfolio.ImageUrl" class="thumb-link" data-size="1050x700">
                                         <img src="@portfolio.ImageUrl" alt="@portfolio.Title">
-                                        <span class="shadow-overlay"></span>
+
+                                        @* Hover Katmanı *@
+                                        <div class="item-folio__text-overlay">
+                                            <span class="item-folio__cat">@portfolio.SubTitle</span>
+                                            <h3 class="item-folio__title">@portfolio.Title</h3>
+                                            <i class="la la-eye overlay-icon"></i>
+                                        </div>
                                     </a>
                                 </div>
 
-                                <div class="item-folio__text">
-                                    <h3 class="item-folio__title">@portfolio.Title</h3>
-                                    <p class="item-folio__cat" style="color: #862121;">@portfolio.SubTitle</p>
-                                </div>
-
-                                @if (!string.IsNullOrEmpty(portfolio.Url))
-                                {
-                                    <a href="@portfolio.Url" class="item-folio__project-link" title="Proje Linki" target="_blank">
-                                        <i class="la la-external-link"></i>
-                                    </a>
-                                }
-
-                                @* Resim büyüdüğünde altında çıkacak açıklama burasıdır *@
+                                @* --- 2. AŞAMA: TIKLAYINCA RESMİN ALTINDA ÇIKACAK AÇIKLAMA --- *@
+                                @* Buton tamamen kaldırıldı, sadece açıklama metni kaldı *@
                                 <div class="item-folio__caption">
-                                    <p>@portfolio.Description</p>
+                                    <p style="font-size: 1.6rem; line-height: 1.6; color: #fff;">@portfolio.Description</p>
                                 </div>
 
                             </div>
@@ -63,28 +51,88 @@
 </section>
 
 <style>
-    /* Bordo Temalı Portfolyo Düzeltmeleri */
-    .item-folio {
-        background: #1e1e1e;
-        /* Dark tema uyumu */
-        border-radius: 4px;
-        overflow: hidden;
+    /* PROJELER ARASI MESAFE VE KUTU DÜZENİ */
+    .portfolio-box {
+        padding: 20px;
     }
 
+    .item-folio {
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #000;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease;
+    }
+
+    /* RESİM ORANI VE DOLGUSU */
+    .item-folio__thumb {
+        position: relative;
+        aspect-ratio: 16 / 10;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    .item-folio__thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* HOVER OVERLAY: BORDO VE NET */
+    .item-folio__text-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(134, 33, 33, 0.92);
+        /* Bordo tonu */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: all 0.4s ease;
+        text-align: center;
+        padding: 25px;
+    }
+
+    .item-folio:hover .item-folio__text-overlay {
+        opacity: 1;
+    }
+
+    .item-folio:hover .item-folio__thumb img {
+        transform: scale(1.1);
+    }
+
+    /* YAZI STİLLERİ */
     .item-folio__title {
         color: #fff !important;
+        font-size: 2.2rem !important;
+        font-weight: 700 !important;
+        margin: 0 !important;
+        letter-spacing: 0.5px;
     }
 
-    .item-folio__project-link {
-        background-color: #862121 !important;
+    .item-folio__cat {
+        color: rgba(255, 255, 255, 0.7);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+        font-weight: 600;
     }
 
-    .item-folio__project-link:hover {
-        background-color: #611717 !important;
+    .overlay-icon {
+        color: #fff;
+        font-size: 3.5rem;
+        margin-top: 15px;
     }
 
-    /* Resim büyütme efekti için imleç */
-    .thumb-link {
-        cursor: zoom-in;
+    /* LIGHTBOX İÇİNDE GÖZÜKECEK ALAN */
+    .item-folio__caption {
+        display: none;
     }
 </style>

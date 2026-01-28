@@ -3,7 +3,6 @@
 @await Component.InvokeAsync("_LayoutHeadComponentPartial")
 
 <style>
-	/* Panel içi geçişleri yumuşatmak ve footer'ı sabitlemek için küçük bir dokunuş */
 	.main-panel {
 		display: flex;
 		flex-direction: column;
@@ -59,6 +58,7 @@
 	</div>
 
 	@await Component.InvokeAsync("_LayoutScriptComponentPartial")
+	@await RenderSectionAsync("Scripts", required: false)
 </body>
 
 </html>

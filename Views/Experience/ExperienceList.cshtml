@@ -4,42 +4,132 @@
 	Layout = "~/Views/Layout/Index.cshtml";
 }
 
+<style>
+	/* Modern Mavi Admin Panel Teması */
+	.custom-card {
+		border: none;
+		border-radius: 12px;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+		background: #ffffff;
+	}
+
+	.thead-modern {
+		background-color: #f4f7fc;
+		border-bottom: 2px solid #e9ecef;
+	}
+
+	.thead-modern th {
+		text-transform: uppercase;
+		font-size: 11px;
+		font-weight: 700;
+		letter-spacing: 1px;
+		color: #4e73df;
+		/* Modern Mavi */
+		padding: 15px 20px !important;
+	}
+
+	/* Avatar Mavi Gradient */
+	.avatar-title-custom {
+		background: linear-gradient(135deg, #4e73df 0%, #224abe 100%) !important;
+		box-shadow: 0 4px 10px rgba(78, 115, 223, 0.3);
+		color: #fff !important;
+		font-weight: 700;
+		border: 2px solid #fff !important;
+	}
+
+	.company-text {
+		font-size: 14px;
+		color: #1a202c;
+		margin-left: 12px;
+	}
+
+	.badge-position {
+		background-color: rgba(78, 115, 223, 0.1);
+		color: #4e73df;
+		font-weight: 600;
+		padding: 5px 12px;
+		border-radius: 20px;
+		font-size: 12px;
+	}
+
+	.table td {
+		vertical-align: middle !important;
+		padding: 15px 20px !important;
+	}
+
+	.btn-action {
+		width: 35px;
+		height: 35px;
+		padding: 0;
+		line-height: 35px;
+		border-radius: 8px;
+		/* Tam yuvarlak yerine hafif köşeli modern yapı */
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.3s ease;
+	}
+
+	.btn-info-custom {
+		color: #36b9cc;
+		border: 1px solid #36b9cc;
+	}
+
+	.btn-danger-custom {
+		color: #e74a3b;
+		border: 1px solid #e74a3b;
+	}
+
+	.btn-action:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	}
+</style>
+
 <div class="content">
 	<div class="container-fluid">
-		<div class="d-flex justify-content-between align-items-center mb-4">
+		<div class="d-flex justify-content-between align-items-center mb-4 pt-3">
 			<div>
-				<h4 class="page-title">İş Deneyimleri</h4>
+				<h4 class="page-title font-weight-bold" style="color: #4e73df;">İş Deneyimleri</h4>
+				<p class="text-muted small mb-0">Kariyer geçmişini bu panelden güncelleyebilirsin.</p>
 			</div>
-			<a href="/Experience/CreateExperience" class="btn btn-primary btn-round">
+			<a href="/Experience/CreateExperience" class="btn btn-primary btn-round shadow-sm px-4"
+				style="background-color: #4e73df; border-color: #4e73df;">
 				<i class="la la-plus"></i> Yeni Deneyim Ekle
 			</a>
 		</div>
 
 		@if (TempData["SuccessMessage"] != null)
 		{
-			<div class="alert alert-success border-0 shadow-sm">@TempData["SuccessMessage"]</div>
+			<div class="alert alert-primary border-0 shadow-sm fade show text-white" role="alert"
+				style="background-color: #4e73df;">
+				<i class="la la-check-circle mr-2"></i> @TempData["SuccessMessage"]
+			</div>
 		}
 
-		<div class="card card-tasks">
-			<div class="card-header border-bottom">
-				<h5 class="card-title">Kariyer Geçmişi</h5>
-			</div>
+		<div class="card custom-card">
 			<div class="card-body p-0">
 				<div class="table-responsive">
-					<table class="table table-hover align-items-center mb-0">
-						<thead class="thead-light">
+					<table class="table table-hover mb-0">
+						<thead class="thead-modern">
 							<tr>
-								<th class="pl-4">Firma / Kurum</th>
+								<th>Firma / Kurum</th>
 								<th>Pozisyon</th>
 								<th>Tarih Aralığı</th>
-								<th class="text-right pr-4">İşlemler</th>
+								<th class="text-right">İşlemler</th>
 							</tr>
 						</thead>
 						<tbody>
 							@if (Model == null || !Model.Any())
 							{
 								<tr>
-									<td colspan="4" class="text-center py-5 text-muted">Henüz bir deneyim kaydı eklenmemiş.</td>
+									<td colspan="4" class="text-center py-5">
+										<div class="text-muted">
+											<i class="la la-info-circle d-block mb-2"
+												style="font-size: 3rem; color: #4e73df; opacity: 0.2;"></i>
+											Henüz bir deneyim kaydı bulunmuyor.
+										</div>
+									</td>
 								</tr>
 							}
 							else
@@ -47,24 +137,30 @@
 								@foreach (var item in Model)
 								{
 									<tr>
-										<td class="pl-4">
+										<td>
 											<div class="d-flex align-items-center">
-												<div class="avatar avatar-sm mr-3">
-													<span class="avatar-title rounded-circle border border-white bg-info">@item.Head</span>
+												<div class="avatar avatar-sm">
+													<span class="avatar-title rounded-circle avatar-title-custom">
+														@(item.Head != null ? item.Head.Substring(0, 1).ToUpper() : "?")
+													</span>
 												</div>
-												<span class="font-weight-bold text-dark">@item.Head</span>
+												<span class="font-weight-bold company-text">@item.Head</span>
 											</div>
 										</td>
-										<td><span class="badge badge-count">@item.Title</span></td>
-										<td><i class="la la-calendar"></i> @item.Date</td>
-										<td class="text-right pr-4">
-											<a href="/Experience/UpdateExperience/@item.ExperienceId" class="btn btn-link btn-info p-1"
+										<td>
+											<span class="badge-position">@item.Title</span>
+										</td>
+										<td class="text-muted">
+											<i class="la la-calendar-alt mr-1"></i> @item.Date
+										</td>
+										<td class="text-right">
+											<a href="/Experience/UpdateExperience/@item.ExperienceId" class="btn btn-action btn-info-custom mr-2"
 												title="Düzenle">
-												<i class="la la-edit" style="font-size: 1.5rem"></i>
+												<i class="la la-edit"></i>
 											</a>
-											<a href="/Experience/DeleteExperience/@item.ExperienceId" class="btn btn-link btn-danger p-1"
-												onclick="return confirm('Bu deneyimi silmek istediğinize emin misiniz?')" title="Sil">
-												<i class="la la-trash" style="font-size: 1.5rem"></i>
+											<a href="/Experience/DeleteExperience/@item.ExperienceId" class="btn btn-action btn-danger-custom"
+												onclick="return confirm('Silmek istediğine emin misin Aziz?')" title="Sil">
+												<i class="la la-trash"></i>
 											</a>
 										</td>
 									</tr>
