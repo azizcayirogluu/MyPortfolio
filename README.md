@@ -1,6 +1,4 @@
 <div align="center">
-  <img src="https://capsule-render.vercel.app/render?type=soft&color=862121&height=200&section=header&text=Aziz%20Çayıroğlu%20Portfolio&fontSize=50&animation=fadeIn" />
-
   <p align="center">
     <img src="https://img.shields.io/badge/ASP.NET%20Core-8.0-512bd4?style=for-the-badge&logo=.net" />
     <img src="https://img.shields.io/badge/Entity%20Framework-Core-512bd4?style=for-the-badge&logo=.net" />
@@ -12,11 +10,10 @@
 </div>
 
 ---
-
 ## 📖 Proje Hakkında
 Bu çalışma, **Murat Yücedağ** eğitim serisi vizyonuyla, statik bir yapının **ASP.NET Core 8.0** mimarisi kullanılarak tamamen dinamik bir platforma dönüştürülmesidir. Ziyaretçiler için estetik bir vitrin sunarken, admin paneli üzerinden tüm içerik, mesajlaşma ve istatistik yönetimi anlık olarak gerçekleştirilmektedir.
 
-### 🖥️ Vitrin Ekran Görüntüleri
+### 🖥️ Ana Sayfa Ekran Görüntüleri
 <table align="center">
   <tr>
     <td><img src="https://github.com/user-attachments/assets/c7feb4da-fbb3-4b66-aa39-5abb0b64430c" width="300" /></td>
@@ -37,19 +34,16 @@ Eğitim içeriğine ek olarak projeye entegre ettiğim kritik geliştirmeler:
 
 - **🔐 Güvenli Yetkilendirme:** `Cookie Authentication` ile sadece yetkili kullanıcıların erişebildiği yüksek güvenlikli admin katmanı.
 - **📧 Mail Entegrasyonu:** Gerçek zamanlı iletişim için iletilerin hem DB'ye kaydı hem de otomatik mail bildirimi.
-- **📸 Dinamik Medya Yönetimi:** `IFormFile` arayüzü ile sunucu taraflı görsel yükleme ve otomatik temizleme döngüsü.
 - **📊 Canlı Veri Dashboard:** Proje ve yetenek metriklerini anlık yansıtan istatistik merkezi.
 - **✅ Görev Takibi:** Admin içi operasyonel verimlilik için interaktif `To-Do List`.
 
 ---
-
 ## 🛠️ Teknoloji Yığını
 | Katman | Kullanılan Teknolojiler |
 | :--- | :--- |
-| **Backend** | C#, ASP.NET Core 8.0, EF Core (Code First) |
+| **Backend** | C#, ASP.NET Core 8.0 |
 | **Database** | MS SQL Server |
 | **Frontend** | HTML5, CSS3, Bootstrap, JS, View Components, ViewModel |
-| **Tools** | Visual Studio 2022, Git, GitHub |
 
 ---
 
